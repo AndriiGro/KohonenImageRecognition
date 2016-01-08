@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace View
 {
@@ -13,5 +14,11 @@ namespace View
     /// </summary>
     public partial class App : Application
     {
+        private void HandleUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            // To handle exceptions globally
+            MessageBox.Show("Exception message: " + e.Exception.Message, "Unhandled exception");
+            e.Handled = true;
+        }
     }
 }
