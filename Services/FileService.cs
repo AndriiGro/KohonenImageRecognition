@@ -22,7 +22,10 @@ namespace Services
                         "*.png|TIFF images|*.tiff; *.tif|All files|*.*"
             };
 
-            if (openFileDialog.ShowDialog() != true) { return null; }
+            if (openFileDialog.ShowDialog() != true)
+            {
+                return null; 
+            }
 
             string filePath = openFileDialog.FileName;
 
@@ -73,7 +76,14 @@ namespace Services
                                 "Please check the path.");
             }
 
+            SaveKohonenNetworkImageToParameters(networkImage);
+
             return networkImage;
+        }
+
+        public void SaveKohonenNetworkImageToParameters(BitmapImage kohonenNetworkImage)
+        {
+            Parameters.CurrentKohonenNetworkImage = kohonenNetworkImage;
         }
     }
 }

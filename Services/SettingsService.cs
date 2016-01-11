@@ -7,7 +7,7 @@ namespace Services
     {
         public string GetSettingValueByKey(string key)
         {
-            string settingValue = "";
+            string settingValue = string.Empty;
 
             try
             {

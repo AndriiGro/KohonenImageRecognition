@@ -9,6 +9,9 @@ namespace View.Pages
     public partial class Home
     {
         private readonly FileService _fileService = new FileService();
+        private readonly KohonenNetworkService _kohonenNetworkService 
+            = new KohonenNetworkService();
+
         public Home()
         {
             InitializeComponent();
@@ -16,10 +19,15 @@ namespace View.Pages
                 _fileService.GetKononenNetworkImageFromDefaultPath();
         }
 
-        private void buttonLoadImage_Click(object sender, RoutedEventArgs e)
+        private void ButtonLoadImage_Click(object sender, RoutedEventArgs e)
         {
             _fileService.SaveBitmapImageForRecognitionToParameters();
             ImageContainerMain.Source = Parameters.LoadedBitmapImageToRecognize;
+        }
+
+        private void ButtonGroupObjectsByCluster_Click(object sender, RoutedEventArgs e)
+        {
+            _kohonenNetworkService.GroupObjectsByColorFromImageToRecongnize();
         }
     }
 }
