@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Services
+namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
     public class ImageService
     {

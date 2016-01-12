@@ -8,7 +8,7 @@
     <ProjectGuid>{EABEFE0F-A827-49EF-8587-3B017FB0016C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>View</RootNamespace>
+    <RootNamespace>AndriiGro.ImageRecognition.KohonenSOM.View</RootNamespace>
     <AssemblyName>View</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -1,11 +1,11 @@
 ﻿using System.Drawing;
 using System.Windows.Media.Imaging;
 
-namespace Services
+namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
     public static class Parameters
     {
-        private static readonly ImageService _imageService = new ImageService();
+        private static readonly ImageService ImageService = new ImageService();
 
         public static Bitmap LoadedBitmapToRecognize { get; set; } = new Bitmap(1, 1);
 
@@ -17,11 +17,12 @@ namespace Services
             {
                 return _loadedBitmapImageToRecognize;
             }
+
             set
             {
                 _loadedBitmapImageToRecognize = value;
                 LoadedBitmapToRecognize = 
-                    _imageService.ConvertBitmapImageToBitmap(value);
+                    ImageService.ConvertBitmapImageToBitmap(value);
             }
         }
 
@@ -39,7 +40,7 @@ namespace Services
             set
             {
                 _currentKohonenNetworkBitmapImage = value;
-                CurrentKohonenNetworkBitmap = _imageService.ConvertBitmapImageToBitmap(value);
+                CurrentKohonenNetworkBitmap = ImageService.ConvertBitmapImageToBitmap(value);
             }
         }
     }

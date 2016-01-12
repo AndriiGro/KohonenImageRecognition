@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Services;
+using AndriiGro.ImageRecognition.KohonenSOM.Services;
 
-namespace View.Pages
+namespace AndriiGro.ImageRecognition.KohonenSOM.View.Pages
 {
     /// <summary>
     /// Interaction logic for Home.xaml

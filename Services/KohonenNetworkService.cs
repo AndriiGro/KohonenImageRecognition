@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace Services
+namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
     public class KohonenNetworkService
     {
@@ -11,9 +11,10 @@ namespace Services
         {
             List<Color> kohonenNetworkColorsList =
                 GetColorsFromCurrentKohonenNetwork();
-            List<List<Color>> colorGroupsList = 
+            List<List<Color>> colorGroupsList =
                 GroupCurrentImagePixelsByColorsList(kohonenNetworkColorsList);
             colorGroupsList = FilterColorGroupsList(colorGroupsList);
+
         }
 
         public List<Color> GetColorsFromCurrentKohonenNetwork()
@@ -24,7 +25,7 @@ namespace Services
             {
                 for (int yPosition = 0; yPosition < Parameters.CurrentKohonenNetworkBitmap.Height; yPosition++)
                 {
-                    Color color = 
+                    Color color =
                         Parameters.CurrentKohonenNetworkBitmap.GetPixel(xPosition, yPosition);
 
                     if (!kohonenNetworkColorsList.Contains(color))
@@ -41,9 +42,9 @@ namespace Services
         {
             double distance = 0;
 
-            distance += (imageColor.R - networkColor.R)*(imageColor.R - networkColor.R);
-            distance += (imageColor.G - networkColor.G)*(imageColor.G - networkColor.G);
-            distance += (imageColor.B - networkColor.B)*(imageColor.B - networkColor.B);
+            distance += (imageColor.R - networkColor.R) * (imageColor.R - networkColor.R);
+            distance += (imageColor.G - networkColor.G) * (imageColor.G - networkColor.G);
+            distance += (imageColor.B - networkColor.B) * (imageColor.B - networkColor.B);
 
             return Math.Sqrt(distance);
         }
@@ -92,7 +93,7 @@ namespace Services
         public List<List<Color>> FilterColorGroupsList(List<List<Color>> colorGroupsList)
         {
             return colorGroupsList
-                .Where(colorList => 
+                .Where(colorList =>
                 colorList.Count >= ApplicationConsts.MIN_QUANTITY_OF_PIXELS_IN_GROUP)
                 .ToList();
         }

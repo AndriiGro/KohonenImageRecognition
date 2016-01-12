@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using System.Configuration;
+﻿using System.Configuration;
+using System.Windows;
 
-namespace Services
+namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
     public class SettingsService
     {

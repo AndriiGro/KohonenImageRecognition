@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 
-namespace Services
+namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
     public class FileService
     {
@@ -83,7 +83,7 @@ namespace Services
 
         public void SaveKohonenNetworkImageToParameters(BitmapImage kohonenNetworkImage)
         {
-            Parameters.CurrentKohonenNetworkImage = kohonenNetworkImage;
+            Parameters.CurrentKohonenNetworkBitmapImage = kohonenNetworkImage;
         }
     }
 }
