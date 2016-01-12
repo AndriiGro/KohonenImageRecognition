@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using AndriiGro.ImageRecognition.KohonenSOM.Entities;
 
 namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
@@ -11,7 +12,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
         {
             List<Color> kohonenNetworkColorsList =
                 GetColorsFromCurrentKohonenNetwork();
-            List<List<Color>> colorGroupsList =
+            List<List<ImagePixel>> colorGroupsList =
                 GroupCurrentImagePixelsByColorsList(kohonenNetworkColorsList);
             colorGroupsList = FilterColorGroupsList(colorGroupsList);
 
@@ -49,9 +50,9 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
             return Math.Sqrt(distance);
         }
 
-        public List<List<Color>> GroupCurrentImagePixelsByColorsList(List<Color> colorsList)
+        public List<List<ImagePixel>> GroupCurrentImagePixelsByColorsList(List<Color> colorsList)
         {
-            var colorGroupsList = new List<List<Color>>();
+            var colorGroupsList = new List<List<ImagePixel>>();
 
             for (int xPosition = 0; xPosition < Parameters.LoadedBitmapToRecognize.Width; xPosition++)
             {
@@ -61,7 +62,10 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
                         Parameters.LoadedBitmapToRecognize.GetPixel(xPosition, yPosition), colorsList);
 
                     colorGroupsList[numberOfColorList]
-                        .Add(Parameters.LoadedBitmapToRecognize.GetPixel(xPosition, yPosition));
+                        .Add(new ImagePixel(
+                            Parameters.LoadedBitmapToRecognize.GetPixel(xPosition, yPosition),
+                            xPosition,
+                            yPosition));
                 }
             }
 
@@ -90,7 +94,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
             return bestMatchingColorPositionInList;
         }
 
-        public List<List<Color>> FilterColorGroupsList(List<List<Color>> colorGroupsList)
+        public List<List<ImagePixel>> FilterColorGroupsList(List<List<ImagePixel>> colorGroupsList)
         {
             return colorGroupsList
                 .Where(colorList =>
