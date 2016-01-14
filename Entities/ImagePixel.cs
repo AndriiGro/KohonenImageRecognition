@@ -9,19 +9,22 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Entities
 {
     public class ImagePixel
     {
-        private Color _imagePixelColor;
-        private Point _imagePixelPosition;
+        public Color ImagePixelColor { get; private set; }
+
+        public Point ImagePixelPosition { get; private set; }
 
         public ImagePixel(Color imagePixelColor, Point imagePixelPosition)
         {
-            _imagePixelColor = imagePixelColor;
-            _imagePixelPosition = imagePixelPosition;
+            ImagePixelColor = imagePixelColor;
+            ImagePixelPosition = imagePixelPosition;
         }
 
         public ImagePixel(Color imagePixelColor, int xPosition, int yPosition)
         {
-            _imagePixelColor = imagePixelColor;
-            _imagePixelPosition = new Point(xPosition, yPosition);
+            ImagePixelColor = imagePixelColor;
+            ImagePixelPosition = new Point(xPosition, yPosition);
         }
+
+
     }
 }

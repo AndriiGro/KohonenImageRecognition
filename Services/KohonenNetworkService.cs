@@ -98,7 +98,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
         {
             return colorGroupsList
                 .Where(colorList =>
-                colorList.Count >= ApplicationConsts.MIN_QUANTITY_OF_PIXELS_IN_GROUP)
+                colorList.Count >= ApplicationConsts.MinQuantityOfPixelsInGroup)
                 .ToList();
         }
     }
