@@ -25,8 +25,28 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Entities
 
         private bool CheckIfPixelAdjacentToThisObject(ImagePixel imagePixel)
         {
+            List<Point> surroundingPoints =
+                GenerateSurroundingPointsOfPixel(imagePixel);
+            List<Point> objectPoints = ConverImagePixelsToPoints(ObjectPixelsList);
 
-            return false;
+            bool ifFoundConnection = false;
+
+            foreach (Point p in surroundingPoints)
+            {
+                if (!objectPoints.Contains(p))
+                {
+                    continue;
+                }
+
+                ifFoundConnection = true;
+            }
+
+            return ifFoundConnection;
+        }
+
+        private List<Point> ConverImagePixelsToPoints(List<ImagePixel> imagePixels)
+        {
+            return imagePixels.Select(pixel => pixel.ImagePixelPosition).ToList();
         }
 
         private void AddObjectImageToThis(ObjectImage objectImage)
