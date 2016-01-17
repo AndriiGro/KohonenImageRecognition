@@ -8,6 +8,8 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
     public class KohonenNetworkService
     {
+        private readonly ObjectImageService _objectImageService = new ObjectImageService();
+
         public void GroupObjectsByColorFromImageToRecongnize()
         {
             List<Color> kohonenNetworkColorsList =
@@ -15,7 +17,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
             List<List<ImagePixel>> colorGroupsList =
                 GroupCurrentImagePixelsByColorsList(kohonenNetworkColorsList);
             colorGroupsList = FilterColorGroupsList(colorGroupsList);
-
+            _objectImageService.RecollectObjectsFromPixels(colorGroupsList);
         }
 
         public List<Color> GetColorsFromCurrentKohonenNetwork()

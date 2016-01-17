@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Media.Imaging;
 
 namespace AndriiGro.ImageRecognition.KohonenSOM.Services
@@ -6,6 +7,8 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
     public static class Parameters
     {
         private static readonly ImageService ImageService = new ImageService();
+
+        public static List<Bitmap> FoundObjectsImagesList = new List<Bitmap>();
 
         public static Bitmap LoadedBitmapToRecognize { get; set; } = new Bitmap(1, 1);
 

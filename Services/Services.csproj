@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ApplicationConsts.cs" />
     <Compile Include="FileService.cs" />
+    <Compile Include="ObjectImageService.cs" />
     <Compile Include="ImageService.cs" />
     <Compile Include="KohonenNetworkService.cs" />
     <Compile Include="Parameters.cs" />
