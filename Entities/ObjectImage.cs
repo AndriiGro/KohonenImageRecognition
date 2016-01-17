@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AndriiGro.ImageRecognition.KohonenSOM.Entities
 {
@@ -12,46 +8,37 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Entities
     {
         public List<ImagePixel> ObjectPixelsList { get; private set; } =
             new List<ImagePixel>();
+        
+        private List<Point> ObjectPointsList { get; set;} = new List<Point>();
 
         public ObjectImage(ImagePixel firstObjectPixel)
         {
             ObjectPixelsList.Add(firstObjectPixel);
+            UpdateObjectPointsList();
         }
 
         public bool CheckIfObjectAdjacentToThis(ObjectImage objectImage)
         {
-            return false;
+            return objectImage.ObjectPixelsList.Any(CheckIfPixelAdjacentToThisObject);
+        }
+
+        public void AddObjectImageToThis(ObjectImage objectImage)
+        {
+            ObjectPixelsList.AddRange(objectImage.ObjectPixelsList);
+            UpdateObjectPointsList();
         }
 
         private bool CheckIfPixelAdjacentToThisObject(ImagePixel imagePixel)
         {
             List<Point> surroundingPoints =
                 GenerateSurroundingPointsOfPixel(imagePixel);
-            List<Point> objectPoints = ConverImagePixelsToPoints(ObjectPixelsList);
 
-            bool ifFoundConnection = false;
-
-            foreach (Point p in surroundingPoints)
-            {
-                if (!objectPoints.Contains(p))
-                {
-                    continue;
-                }
-
-                ifFoundConnection = true;
-            }
-
-            return ifFoundConnection;
+            return surroundingPoints.Any(p => ObjectPointsList.Contains(p));
         }
 
         private List<Point> ConverImagePixelsToPoints(List<ImagePixel> imagePixels)
         {
             return imagePixels.Select(pixel => pixel.ImagePixelPosition).ToList();
-        }
-
-        private void AddObjectImageToThis(ObjectImage objectImage)
-        {
-            ObjectPixelsList.AddRange(objectImage.ObjectPixelsList);
         }
 
         private List<Point> GenerateSurroundingPointsOfPixel(ImagePixel imagePixel)
@@ -70,6 +57,11 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Entities
             surroundingPoints.Add(new Point((centre.X - 1), (centre.Y)));
 
             return surroundingPoints;
+        }
+
+        private void UpdateObjectPointsList()
+        {
+            ObjectPointsList = ConverImagePixelsToPoints(ObjectPixelsList);
         }
     }
 }
