@@ -1,6 +1,8 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
+using AndriiGro.ImageRecognition.KohonenSOM.Entities;
 
 namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
@@ -28,6 +30,36 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 
                 return new Bitmap(bitmap);
             }
+        }
+
+        public List<Bitmap> ConvertObjectImagestoBitmaps(List<ObjectImage> images)
+        {
+            var bitmaps = new List<Bitmap>();
+
+            images.ForEach(image =>
+            {
+                bitmaps.Add(ConvertObjectImageToBitmap(image));
+            });
+
+            return bitmaps;
+        }
+
+        public Bitmap ConvertObjectImageToBitmap(ObjectImage image)
+        {
+            //max possible size of object
+            var bitmap = new Bitmap(
+                Parameters.LoadedBitmapToRecognize.Width, 
+                Parameters.LoadedBitmapToRecognize.Height);
+
+            image.ObjectPixelsList.ForEach(pixel =>
+            {
+                bitmap.SetPixel(
+                    pixel.ImagePixelPosition.X, 
+                    pixel.ImagePixelPosition.Y, 
+                    pixel.ImagePixelColor);
+            });
+
+            return bitmap;
         }
     }
 }

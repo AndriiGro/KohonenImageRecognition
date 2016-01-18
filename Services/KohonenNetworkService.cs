@@ -17,7 +17,9 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
             List<List<ImagePixel>> colorGroupsList =
                 GroupCurrentImagePixelsByColorsList(kohonenNetworkColorsList);
             colorGroupsList = FilterColorGroupsList(colorGroupsList);
-            _objectImageService.RecollectObjectsFromPixels(colorGroupsList);
+            
+            _objectImageService.SaveObjectsToParametersAsBitmaps(
+                _objectImageService.RecollectObjectsFromPixels(colorGroupsList));
         }
 
         public List<Color> GetColorsFromCurrentKohonenNetwork()
