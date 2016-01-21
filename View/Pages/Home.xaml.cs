@@ -28,7 +28,9 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.View.Pages
 
         private async void ButtonGroupObjectsByCluster_Click(object sender, RoutedEventArgs e)
         {
-            Task objectsClassificationTask = new Task(
+            ButtonGroupObjectsByCluster.IsEnabled = false;
+
+            var objectsClassificationTask = new Task(
                 () =>
                 {
                     _kohonenNetworkService.GroupObjectsByColorFromImageToRecongnize();
@@ -37,6 +39,8 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.View.Pages
 
             objectsClassificationTask.Start();
             await objectsClassificationTask;
+
+            ButtonGroupObjectsByCluster.IsEnabled = true;
 
             ImageContainerCarousel.Source = 
                 Parameters.FoundObjectsBitmapImages[Parameters.CurrentCarouselImagePosition];

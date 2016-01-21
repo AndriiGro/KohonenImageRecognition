@@ -16,7 +16,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 
         public List<ObjectImage> RecollectObjectsFromPixels(List<List<ImagePixel>> colorGroupList)
         {
-            List<ObjectImage> objectsImages = new List<ObjectImage>();
+            var objectsImages = new List<ObjectImage>();
 
             colorGroupList.ForEach(colorGroup =>
             {

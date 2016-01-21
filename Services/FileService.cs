@@ -17,9 +17,9 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
                 CheckFileExists = true,
                 AddExtension = true,
                 Multiselect = false,
-                Filter = "JPEG images|*.jpg; *.jpeg; *.jpe; *.jif; *.jfif; *.jfi|" +
+                Filter = "All files|*.*|JPEG images|*.jpg; *.jpeg; *.jpe; *.jif; *.jfif; *.jfi|" +
                         "Bitmap images|*.bmp|GIF images|*.gif|PNG images|" +
-                        "*.png|TIFF images|*.tiff; *.tif|All files|*.*"
+                        "*.png|TIFF images|*.tiff; *.tif"
             };
 
             if (openFileDialog.ShowDialog() != true)

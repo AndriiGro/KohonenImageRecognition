@@ -15,7 +15,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
             List<Color> kohonenNetworkColorsList =
                 GetColorsFromCurrentKohonenNetwork();
             List<List<ImagePixel>> colorGroupsList =
-                GroupCurrentImagePixelsByColorsList(kohonenNetworkColorsList);
+                GroupCurrentImagePixelsByColors(kohonenNetworkColorsList);
             colorGroupsList = FilterColorGroupsList(colorGroupsList);
             
             _objectImageService.SaveObjectsToParametersAsBitmaps(
@@ -54,9 +54,13 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
             return Math.Sqrt(distance);
         }
 
-        public List<List<ImagePixel>> GroupCurrentImagePixelsByColorsList(List<Color> colorsList)
+        public List<List<ImagePixel>> GroupCurrentImagePixelsByColors(List<Color> colorsList)
         {
+            int maxColorGroupQuanity = Parameters.CurrentKohonenNetworkBitmap.Width*
+                                       Parameters.CurrentKohonenNetworkBitmap.Height;
             var colorGroupsList = new List<List<ImagePixel>>();
+
+            colorGroupsList.EnsureSize(maxColorGroupQuanity);
 
             for (int xPosition = 0; xPosition < Parameters.LoadedBitmapToRecognize.Width; xPosition++)
             {
@@ -73,6 +77,8 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
                 }
             }
 
+            colorGroupsList.TrimExcess();
+
             return colorGroupsList;
         }
 
@@ -86,7 +92,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
                 var color = colorsList[index];
                 double tempDistance = GetEuclideanDistanceForTwoRgbColors(processingColor, color);
 
-                if (!(tempDistance < lowestEuclideanDistanceBetweenTwoColors))
+                if (tempDistance > lowestEuclideanDistanceBetweenTwoColors)
                 {
                     continue;
                 }
