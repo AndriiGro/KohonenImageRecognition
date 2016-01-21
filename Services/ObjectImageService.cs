@@ -6,10 +6,12 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 {
     public class ObjectImageService
     {
+        private readonly ImageService _imageService = new ImageService();
+
         //convert to Bitmaps 
         public void SaveObjectsToParametersAsBitmaps(List<ObjectImage> objectImages)
         {
-            
+            Parameters.FoundObjectsImagesList = _imageService.ConvertObjectImagestoBitmaps(objectImages);
         }
 
         public List<ObjectImage> RecollectObjectsFromPixels(List<List<ImagePixel>> colorGroupList)

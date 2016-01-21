@@ -10,6 +10,9 @@
         <Image Name="ImageContainerMain" Height="329" Width="338" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1000" Margin="0,10,0,0"/>
         <Image x:Name="ImageContainerKononenNetwork" HorizontalAlignment="Left" Height="100" Margin="528,10,0,0" VerticalAlignment="Top" Width="100" Panel.ZIndex="1000"/>
         <Label x:Name="LabelImageContainerKohonenNetwork" Content="Current Kohonen network:" HorizontalAlignment="Left" Margin="366,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="ButtonGroupObjectsByCluster" Content="Group objects by cluster" HorizontalAlignment="Left" Margin="366,115,0,0" VerticalAlignment="Top" Width="201" Click="ButtonGroupObjectsByCluster_Click"/>
+        <Button x:Name="ButtonGroupObjectsByCluster" Content="Group objects by cluster" HorizontalAlignment="Left" Margin="366,128,0,0" VerticalAlignment="Top" Width="201" Click="ButtonGroupObjectsByCluster_Click"/>
+        <Image x:Name="ImageContainerCarousel" HorizontalAlignment="Left" Height="221" Margin="366,176,0,0" VerticalAlignment="Top" Width="262"/>
+        <Button x:Name="ButtonNext" Content="Next" HorizontalAlignment="Left" Margin="260,373,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="ButtonNext_Click"/>
+        <Button x:Name="ButtonPrevious" Content="Previous" HorizontalAlignment="Left" Margin="167,373,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
     </Grid>
 </UserControl>

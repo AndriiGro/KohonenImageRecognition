@@ -7,9 +7,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
     public static class Parameters
     {
         private static readonly ImageService ImageService = new ImageService();
-
-        public static List<Bitmap> FoundObjectsImagesList = new List<Bitmap>();
-
+        
         public static Bitmap LoadedBitmapToRecognize { get; set; } = new Bitmap(1, 1);
 
         private static BitmapImage _loadedBitmapImageToRecognize = new BitmapImage();
@@ -46,5 +44,25 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
                 CurrentKohonenNetworkBitmap = ImageService.ConvertBitmapImageToBitmap(value);
             }
         }
+
+        private static List<Bitmap> _foundObjectsImagesList = new List<Bitmap>();
+
+        public static List<Bitmap> FoundObjectsImagesList
+        {
+            get
+            {
+                return _foundObjectsImagesList;
+            }
+            set
+            {
+                _foundObjectsImagesList = value;
+                FoundObjectsBitmapImages = 
+                    ImageService.ConvertBitmapsToBitmapImages(value);
+            }
+        }
+
+        public static List<BitmapImage> FoundObjectsBitmapImages { get; set; } = new List<BitmapImage>();
+
+        public static int CurrentCarouselImagePosition = 0;
     }
 }

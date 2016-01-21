@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using AndriiGro.ImageRecognition.KohonenSOM.Services;
 
 namespace AndriiGro.ImageRecognition.KohonenSOM.View.Pages
@@ -25,9 +26,36 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.View.Pages
             ImageContainerMain.Source = Parameters.LoadedBitmapImageToRecognize;
         }
 
-        private void ButtonGroupObjectsByCluster_Click(object sender, RoutedEventArgs e)
+        private async void ButtonGroupObjectsByCluster_Click(object sender, RoutedEventArgs e)
         {
-            _kohonenNetworkService.GroupObjectsByColorFromImageToRecongnize();
+            Task objectsClassificationTask = new Task(
+                () =>
+                {
+                    _kohonenNetworkService.GroupObjectsByColorFromImageToRecongnize();
+                }
+                );
+
+            objectsClassificationTask.Start();
+            await objectsClassificationTask;
+
+            ImageContainerCarousel.Source = 
+                Parameters.FoundObjectsBitmapImages[Parameters.CurrentCarouselImagePosition];
+            ButtonNext.IsEnabled = true;
+        }
+
+        private void ButtonNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (Parameters.CurrentCarouselImagePosition <= Parameters.FoundObjectsBitmapImages.Count)
+            {
+                Parameters.CurrentCarouselImagePosition++;
+            }
+            else
+            {
+                Parameters.CurrentCarouselImagePosition = 0;
+            }
+
+            ImageContainerCarousel.Source =
+                Parameters.FoundObjectsBitmapImages[Parameters.CurrentCarouselImagePosition];
         }
     }
 }
