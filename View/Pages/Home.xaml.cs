@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using AndriiGro.ImageRecognition.KohonenSOM.Services;
 
 namespace AndriiGro.ImageRecognition.KohonenSOM.View.Pages
@@ -10,7 +12,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.View.Pages
     public partial class Home
     {
         private readonly FileService _fileService = new FileService();
-        private readonly KohonenNetworkService _kohonenNetworkService 
+        private readonly KohonenNetworkService _kohonenNetworkService
             = new KohonenNetworkService();
 
         public Home()
@@ -26,24 +28,28 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.View.Pages
             ImageContainerMain.Source = Parameters.LoadedBitmapImageToRecognize;
         }
 
-        private async void ButtonGroupObjectsByCluster_Click(object sender, RoutedEventArgs e)
+        private void ButtonGroupObjectsByCluster_Click(object sender, RoutedEventArgs e)
         {
             ButtonGroupObjectsByCluster.IsEnabled = false;
 
-            var objectsClassificationTask = new Task(
-                () =>
-                {
-                    _kohonenNetworkService.GroupObjectsByColorFromImageToRecongnize();
-                }
-                );
+            //var objectsClassificationTask = new Task(
+            //    () =>
+            //    {
+            //       
+            //    }
+            //    );
 
-            objectsClassificationTask.Start();
-            await objectsClassificationTask;
+            //objectsClassificationTask.Start();
+
+            //await objectsClassificationTask;
+
+            _kohonenNetworkService.GroupObjectsByColorFromImageToRecongnize();
 
             ButtonGroupObjectsByCluster.IsEnabled = true;
 
-            ImageContainerCarousel.Source = 
+            ImageContainerCarousel.Source =
                 Parameters.FoundObjectsBitmapImages[Parameters.CurrentCarouselImagePosition];
+
             ButtonNext.IsEnabled = true;
         }
 

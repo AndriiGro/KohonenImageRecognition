@@ -77,8 +77,6 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
                 }
             }
 
-            colorGroupsList.TrimExcess();
-
             return colorGroupsList;
         }
 

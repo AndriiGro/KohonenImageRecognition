@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AndriiGro.ImageRecognition.KohonenSOM.Entities;
 
 namespace AndriiGro.ImageRecognition.KohonenSOM.Services
@@ -24,17 +23,13 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 
                 while (true)
                 {
-                    Tuple<bool, List<ObjectImage>> searchResult = FindConnectionBetweenObjects(objects);
-
-                    bool isSearchSucceded = searchResult.Item1;
-                    List<ObjectImage> recollectedObjectImages = searchResult.Item2;
+                    bool isSearchSucceded = FindConnectionBetweenObjects(ref objects);
 
                     if (isSearchSucceded)
                     {
                         continue;
                     }
 
-                    objects = recollectedObjectImages;
                     break;
                 }
 
@@ -56,7 +51,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
             return objectImages;
         }
         
-        private Tuple<bool, List<ObjectImage>> FindConnectionBetweenObjects(List<ObjectImage> objectImages)
+        private bool FindConnectionBetweenObjects(ref List<ObjectImage> objectImages)
         {
             bool canFindConnections = true;
             
@@ -103,9 +98,7 @@ namespace AndriiGro.ImageRecognition.KohonenSOM.Services
 
             } while (canFindConnections);
 
-            return new Tuple<bool, List<ObjectImage>>(isAnyConnectionFound, objectImages);
+            return isAnyConnectionFound;
         }
-
-
     }
 }
